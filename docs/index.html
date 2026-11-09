@@ -7,20 +7,22 @@
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<nav aria-label="Main navigation"><div><a href="index.html" aria-current="page">Home</a><a href="proposal.html">Proposal</a><a href="milestone.html">Milestone</a><a href="report.html">Final Report</a><a href="proposal.pdf">Proposal PDF</a></div></nav>
-<main>
-<header><h1>Parallelizing a quantum computation simulator</h1><p class="subtitle">15-418 Course Project</p><p class="author">Ayush Garg · 15-418 · Fall 2026</p></header>
-<h2>Summary</h2>
+<nav class="nav" aria-label="Main navigation"><div class="nav-container"><a class="nav-link" href="index.html" aria-current="page">Home</a><a class="nav-link" href="proposal.html">Proposal</a><a class="nav-link" href="milestone.html">Milestone</a><a class="nav-link" href="report.html">Final Report</a><a class="nav-link" href="proposal.pdf">Proposal PDF</a></div></nav>
+<main class="container">
+<header class="title-section"><h1>Parallelizing a quantum computation simulator</h1><p class="subtitle">15-418 Course Project</p><p class="authors">Creator: Ayush Garg</p></header>
+<section class="content-section"><h2>Summary</h2>
 <p>My goal is to parallelize the simulation of a quantum computer using GPUs, focusing on speeding up state-vector updates and scheduling computations effectively. I plan to write a simulator in C++ and CUDA, compare it with a sequential implementation, and use Qiskit to check correctness.</p>
 
-<h2>Reports</h2>
+</section>
+<section class="content-section"><h2>Reports</h2>
 <ul>
   <li>Project proposal: <a href="proposal.html">HTML</a> | <a href="proposal.pdf">PDF</a></li>
   <li><a href="milestone.html">Milestone report</a>: not yet available.</li>
   <li><a href="report.html">Final report and poster</a>: not yet available.</li>
 </ul>
 
-<h2>Project goals</h2>
+</section>
+<section class="content-section"><h2>Project goals</h2>
 <ul>
   <li>Implement a sequential state-vector simulator and benchmark circuits.</li>
   <li>Parallelize amplitude updates using CUDA.</li>
@@ -29,7 +31,8 @@
 </ul>
 <p>I hope to demonstrate a small instance of Shor's algorithm, such as factoring 119, if the circuit fits within the available memory. Multi-device simulation is a stretch goal. The proposed 100–250× speedup is a target relative to my sequential implementation, not a measured result.</p>
 
-<h2 id="schedule">Schedule</h2>
+</section>
+<section class="content-section"><h2 id="schedule">Schedule</h2>
 <table>
 <thead><tr><th scope="col">Dates</th><th scope="col">Planned work</th></tr></thead>
 <tbody>
@@ -41,7 +44,8 @@
 </tbody>
 </table>
 
+</section>
+<footer><p>Ayush Garg · Carnegie Mellon University · 15-418, Fall 2026</p></footer>
 </main>
-<footer>Ayush Garg · Carnegie Mellon University</footer>
 </body>
 </html>

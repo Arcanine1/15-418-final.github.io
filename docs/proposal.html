@@ -7,16 +7,17 @@
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<nav aria-label="Main navigation"><div><a href="index.html">Home</a><a href="proposal.html" aria-current="page">Proposal</a><a href="milestone.html">Milestone</a><a href="report.html">Final Report</a><a href="proposal.pdf">Proposal PDF</a></div></nav>
-<main>
-<header><h1>Project Proposal</h1><p class="subtitle">Parallelizing a quantum computation simulator</p><p class="author">Ayush Garg · 15-418 · Fall 2026</p></header>
-<article><h2 id="summary">Summary</h2>
+<nav class="nav" aria-label="Main navigation"><div class="nav-container"><a class="nav-link" href="index.html">Home</a><a class="nav-link" href="proposal.html" aria-current="page">Proposal</a><a class="nav-link" href="milestone.html">Milestone</a><a class="nav-link" href="report.html">Final Report</a><a class="nav-link" href="proposal.pdf">Proposal PDF</a></div></nav>
+<main class="container">
+<header class="title-section"><h1>Project Proposal</h1><p class="subtitle">Parallelizing a quantum computation simulator</p><p class="authors">Creator: Ayush Garg</p></header>
+<article><section class="content-section"><h2 id="summary">Summary</h2>
 <p>My goal is to parallelize the simulation of a quantum computer using
 GPUs, with the main focus on speeding up state-vector updates and
 scheduling the necessary computations as effectively as possible. I plan
 to implement the simulator from scratch in C++ and CUDA and evaluate it
 on the GHC machines.</p>
-<h2 id="background">Background</h2>
+</section>
+<section class="content-section"><h2 id="background">Background</h2>
 <p>At its core, state-vector simulation of quantum circuits involves
 keeping track of a complex <strong>probability amplitude</strong> for
 every possible arrangement of bits. The squared magnitude of an
@@ -76,7 +77,8 @@ control bit is 1. In control–target order,</p>
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mrow><mo stretchy="true" form="prefix">(</mo><mrow><mo stretchy="true" form="prefix">|</mo><mn>00</mn><mo stretchy="false" form="postfix">⟩</mo><mo>+</mo><mo stretchy="true" form="postfix">|</mo></mrow><mn>10</mn><mo stretchy="false" form="postfix">⟩</mo><mo stretchy="true" form="postfix">)</mo></mrow><mi>/</mi><msqrt><mn>2</mn></msqrt></mrow><annotation encoding="application/x-tex">(|00\rangle+|10\rangle)/\sqrt2</annotation></semantics></math>
 to the entangled state
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mrow><mo stretchy="true" form="prefix">(</mo><mrow><mo stretchy="true" form="prefix">|</mo><mn>00</mn><mo stretchy="false" form="postfix">⟩</mo><mo>+</mo><mo stretchy="true" form="postfix">|</mo></mrow><mn>11</mn><mo stretchy="false" form="postfix">⟩</mo><mo stretchy="true" form="postfix">)</mo></mrow><mi>/</mi><msqrt><mn>2</mn></msqrt></mrow><annotation encoding="application/x-tex">(|00\rangle+|11\rangle)/\sqrt2</annotation></semantics></math>.</p>
-<h2 id="opportunities-for-parallelism">Opportunities for
+</section>
+<section class="content-section"><h2 id="opportunities-for-parallelism">Opportunities for
 parallelism</h2>
 <ol type="1">
 <li><p><strong>Parallel state-vector updates.</strong> A single-qubit
@@ -104,7 +106,8 @@ the state vector across devices increases the available memory. However,
 gates that combine amplitudes on different devices require
 communication. I may not have time to implement this extension.</p></li>
 </ol>
-<h2 id="the-challenge">The challenge</h2>
+</section>
+<section class="content-section"><h2 id="the-challenge">The challenge</h2>
 <p>There are many challenges with simulating a quantum computer.</p>
 <p>The first and foremost is dealing with the memory requirements. An
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>-qubit
@@ -138,14 +141,16 @@ only take us so far. Trying to extract as many qubits as possible out of
 the simulation seems like a fun and worthy challenge when every
 additional qubit makes our memory problems twice as painful and
 increases the work per full state-vector pass by a factor of two.</p>
-<h2 id="resources">Resources</h2>
+</section>
+<section class="content-section"><h2 id="resources">Resources</h2>
 <p>I plan to use the GHC machines with NVIDIA GPUs for most of the
 computation. I will start from scratch and use Qiskit’s CPU
 <code>Statevector</code> implementation as a correctness reference. I do
 not hope to match the speed of a mature simulator as it also has GPU
 implementations and likely does much more complex optimizations, but I
 still hope to get a good speedup.</p>
-<h2 id="goals-and-deliverables">Goals and deliverables</h2>
+</section>
+<section class="content-section"><h2 id="goals-and-deliverables">Goals and deliverables</h2>
 <h3 id="plan-to-achieve">Plan to achieve</h3>
 <ol type="1">
 <li><strong>Sequential baseline.</strong> Create a correct C++
@@ -193,13 +198,15 @@ with equal memory would only allow for two extra qubits.</p>
 correct serial and single-GPU implementations. I might not be able to
 create as effective schedulers, and I think that I will likely just end
 up with a lower speedup.</p>
-<h2 id="platform-choice">Platform choice</h2>
+</section>
+<section class="content-section"><h2 id="platform-choice">Platform choice</h2>
 <p>I plan to use C++ for the serial implementation and CUDA for GPU
 kernels on the GHC machines. I am choosing CUDA since we have worked
 with it in class and it maps naturally to the many independent amplitude
 updates required by each gate. When possible, I will also use Thrust to
 make the code easier to read and faster.</p>
-<h2 id="schedule">Schedule</h2>
+</section>
+<section class="content-section"><h2 id="schedule">Schedule</h2>
 <table>
 <colgroup>
 <col style="width: 50%" />
@@ -242,8 +249,9 @@ and prepare the poster.</td>
 </tr>
 </tbody>
 </table>
+</section>
 </article>
+<footer><p>Ayush Garg · Carnegie Mellon University · 15-418, Fall 2026</p></footer>
 </main>
-<footer>Ayush Garg · Carnegie Mellon University</footer>
 </body>
 </html>
