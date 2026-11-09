@@ -19,6 +19,7 @@ There is no build step and no framework to install. All internal links are relat
 - `docs/index.html` — homepage with project overview, schedule, and report links.
 - `docs/proposal.html` — full web proposal with rendered math.
 - `docs/proposal.pdf` — your original final proposal PDF, unchanged.
+- `docs/milestone.html` and `docs/report.html` — report pages ready for future updates.
 - `docs/style.css` — responsive styling shared by both pages.
 - `proposal.md` — editable proposal text and equations.
 - `update-proposal.py` — optional helper to regenerate the HTML article from Markdown.
@@ -47,4 +48,4 @@ The PDF still contains its original project-URL placeholder. After deployment, a
 
 ## Add milestone and final reports
 
-Place each new document in `docs/`. In `docs/index.html`, replace the relevant "Not yet available" label with a link to the actual document. No future report links are active until those files exist. Nothing on this website claims completed experiments or measured speedups.
+Replace the placeholder text in `docs/milestone.html` or `docs/report.html` with your report. Place PDFs and the poster in `docs/` and link to them from the appropriate page. Update the availability labels on the homepage when those reports are ready.
