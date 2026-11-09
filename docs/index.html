@@ -1,1 +1,46 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="theme-color" content="#142c3c"><link rel="stylesheet" href="style.css"><title>Parallelizing a quantum computation simulator</title><meta name="description" content="A CMU 15-418 project exploring CUDA acceleration, gate fusion, and scheduling for state-vector quantum simulation."></head><body><header class="top"><a class="brand" href="index.html"><span class="brandmark">ψ</span> Parallel quantum simulation</a><nav aria-label="Main navigation"><a href="index.html#schedule">Schedule</a><a href="proposal.html">Proposal</a><a class="nav-download" href="proposal.pdf">PDF ↗</a></nav></header><main><section class="hero"><div><p class="eyebrow">CARNEGIE MELLON / 15-418 / FALL 2026</p><h1>Parallelizing a<br>quantum computation<br><em>simulator.</em></h1><p class="lede">Exploring how GPU parallelism, gate fusion, and careful scheduling can accelerate the evolution of a quantum state.</p><p class="byline">Ayush Garg</p><div class="actions"><a class="button primary" href="proposal.html">Read the proposal <span>↗</span></a><a class="button" href="proposal.pdf">Download PDF</a></div></div><figure class="state-panel"><div class="panel-top"><span>THE WORKLOAD</span><span>n = 3</span></div><div class="state-heading">One state.<br><span>2<sup>n</sup> amplitudes.</span></div><div class="amplitudes" aria-label="Eight amplitudes in a three-qubit state"><span>α₀<small>|000⟩</small></span><span>α₁<small>|001⟩</small></span><span>α₂<small>|010⟩</small></span><span>α₃<small>|011⟩</small></span><span>α₄<small>|100⟩</small></span><span>α₅<small>|101⟩</small></span><span>α₆<small>|110⟩</small></span><span>α₇<small>|111⟩</small></span></div><figcaption>Partition amplitude updates across GPU threads while preserving dependencies between gates.</figcaption><div class="gate-strip"><span>H</span><span>T</span><span>CNOT</span><small>CORE GATE SET</small></div></figure></section><section class="overview" id="overview"><p class="eyebrow">01 / THE PROJECT</p><div class="split"><h2>More parallel work.<br>Less data movement.</h2><div><p>My goal is to parallelize the simulation of a quantum computer using GPUs, with the main focus on speeding up state-vector updates and scheduling the necessary computations as effectively as possible.</p><p>I will build the simulator from scratch in C++ and CUDA on the GHC machines, validate small circuits against Qiskit, and compare the GPU implementation with a sequential baseline.</p></div></div><div class="approaches"><div><span class="number">01</span><h3>Amplitude updates</h3><p>Update independent amplitude pairs concurrently within each gate.</p></div><div><span class="number">02</span><h3>Gate scheduling</h3><p>Explore fusion and separately simulate qubit groups when their states remain independent.</p></div><div><span class="number">03</span><h3>Multiple devices</h3><p>A stretch goal: trade communication for a larger available state-vector memory.</p></div></div></section><section class="project-record" id="reports"><p class="eyebrow">02 / PROJECT RECORD</p><h2>From proposal to evaluation.</h2><div class="report-row"><div><span class="tag">AVAILABLE</span><h3>Project proposal</h3><p>Background, challenges, resources, goals, and schedule.</p></div><a class="text-link" href="proposal.html">Read proposal ↗</a></div><div class="report-row"><div><span class="tag pending">PLANNED · NOV 23</span><h3>Milestone report</h3><p>Implementation progress and a revised plan.</p></div><span class="pending-label">Not yet available</span></div><div class="report-row"><div><span class="tag pending">PLANNED · DEC 10–11</span><h3>Final report &amp; poster</h3><p>Performance evaluation, findings, and presentation.</p></div><span class="pending-label">Not yet available</span></div></section><section id="schedule"><p class="eyebrow">03 / SCHEDULE</p><h2>Five weeks of implementation &amp; evaluation.</h2><div class="timeline"><div><time>Nov 9–16</time><h3>Build the baseline</h3><p>Serial simulator, gate representation, correctness checks, and benchmark circuits.</p><small>PROPOSAL · NOV 9</small></div><div><time>Nov 16–23</time><h3>Move to the GPU</h3><p>Basic CUDA kernels, validation, and initial timings.</p><small>MILESTONE · NOV 23</small></div><div><time>Nov 23–30</time><h3>Schedule &amp; fuse</h3><p>Independent-group evaluation and gate/kernel fusion.</p></div><div><time>Nov 30–Dec 7</time><h3>Optimize &amp; measure</h3><p>Benchmark sweeps, bottleneck investigation, and report preparation; assess whether multi-device execution is needed to scale further.</p></div><div><time>Dec 7–11</time><h3>Complete &amp; present</h3><p>Final validation, report writing, and poster preparation.</p><small>REPORT · DEC 10 / POSTER · DEC 11</small></div></div></section><section class="closing"><p class="eyebrow">SUCCESS CRITERIA</p><h2>Correctness first. Measured speedup.</h2><p>The 100–250× speedup target is aspirational and measured against my own single-threaded CPU baseline. I will evaluate scaling across qubit counts and circuit lengths. A small Shor demonstration, such as factoring 119, depends on circuit feasibility; multi-device execution remains a stretch goal.</p><a class="text-link" href="proposal.html#goals-and-deliverables">Explore the deliverables ↗</a></section></main><footer><span>Ayush Garg · Carnegie Mellon University</span><span>15-418 · Fall 2026</span></footer></body></html>
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Parallelizing a quantum computation simulator</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<main>
+<h1>Parallelizing a quantum computation simulator</h1>
+<p>Ayush Garg<br>15-418: Parallel Computer Architecture and Programming<br>Carnegie Mellon University, Fall 2026</p>
+
+<h2>Summary</h2>
+<p>My goal is to parallelize the simulation of a quantum computer using GPUs, focusing on speeding up state-vector updates and scheduling computations effectively. I plan to write a simulator in C++ and CUDA, compare it with a sequential implementation, and use Qiskit to check correctness.</p>
+
+<h2>Reports</h2>
+<ul>
+  <li>Project proposal: <a href="proposal.html">HTML</a> | <a href="proposal.pdf">PDF</a></li>
+  <li>Milestone report: not yet available.</li>
+  <li>Final report and poster: not yet available.</li>
+</ul>
+
+<h2>Project goals</h2>
+<ul>
+  <li>Implement a sequential state-vector simulator and benchmark circuits.</li>
+  <li>Parallelize amplitude updates using CUDA.</li>
+  <li>Explore gate fusion and independent qubit-group evaluation.</li>
+  <li>Measure performance across qubit counts and circuit lengths.</li>
+</ul>
+<p>I hope to demonstrate a small instance of Shor's algorithm, such as factoring 119, if the circuit fits within the available memory. Multi-device simulation is a stretch goal. The proposed 100–250× speedup is a target relative to my sequential implementation, not a measured result.</p>
+
+<h2 id="schedule">Schedule</h2>
+<table>
+<thead><tr><th scope="col">Dates</th><th scope="col">Planned work</th></tr></thead>
+<tbody>
+<tr><td>November 9–16</td><td>Serial simulator, correctness checks, and benchmark circuits.</td></tr>
+<tr><td>November 16–23</td><td>Basic CUDA implementation, validation, and initial timings.</td></tr>
+<tr><td>November 23–30</td><td>Independent-group evaluation and gate/kernel fusion.</td></tr>
+<tr><td>November 30–December 7</td><td>Optimization, benchmark sweeps, and report preparation. Assess multi-device execution if time permits.</td></tr>
+<tr><td>December 7–11</td><td>Final validation, report, and poster.</td></tr>
+</tbody>
+</table>
+</main>
+</body>
+</html>
