@@ -9,8 +9,45 @@
 <body>
 <nav class="nav" aria-label="Main navigation"><div class="nav-container"><a class="nav-link" href="index.html">Home</a><a class="nav-link" href="proposal.html">Proposal</a><a class="nav-link" href="milestone.html" aria-current="page">Milestone</a><a class="nav-link" href="report.html">Final Report</a><a class="nav-link" href="proposal.pdf">Proposal PDF</a></div></nav>
 <main class="container">
-<header class="title-section"><h1>Milestone Report</h1><p class="subtitle">Parallelizing a quantum computation simulator</p><p class="authors">Creator: Ayush Garg</p></header>
-<p>This report is not yet available.</p><p><a href="proposal.html">View the project proposal</a>.</p>
+<header class="title-section"><h1>Milestone Report</h1><p class="subtitle">Parallelizing a quantum computation simulator</p><p class="authors">Creator: Ayush Garg</p><p><time datetime="2026-11-23">November 23, 2026</time></p><p><a href="milestone.pdf">View milestone report (PDF)</a> · <a href="proposal.html">Project proposal</a></p></header>
+<article>
+<section class="content-section"><h2>Work that has been done</h2>
+<p>So far I have finished the serial implementation of the my quantum computer simulator. Overall this went rather smoothly with me creating a giant vector of complex numbers and manipulating them one at a time. I choose to utilize an input format of a JSON, so that we could effectively create small test cases. Although this did force me to utilize an external C++ dependency to parse the JSON.</p>
+<p>Another thing I spent a lot of time working on was supporting Python scripts for the project. First, I created a Python script that would run my C++ implementation against the Qiskit benchmark and test it for correctness along with doing timing analysis. One mis-step I took was trying to create my own implementation of a Shors algorithm circuit. I sunk a good bit of time into this pursuit but it ended up not working out and I wanted to focus more on the parallel computation than this circuit generation aspect, so instead I am using MQT which is a database of quantum circuit premade for me to use.</p>
+<p>Finally, I started the CUDA implementation of the code. While I think the implementation is quite close to being ready there are still a couple of bugs that I am tracking down as we are failing my correctness suite.</p>
+</section>
+<section class="content-section"><h2>Schedule Status</h2>
+<p>I think that I am slightly behind schedule. I think that this is for two reasons, the first being the mistep of trying to create my own shors algorithm gate generator. The second is that I have been traveling over the last week, so I have had a lot less time to work than I would have liked. I still think I will be able to hit all of the goals I had laid out but might not be able to hit the nice to have. Here is my updated list of goals:</p>
+<ol>
+<li><strong>Sequential baseline.</strong> Create a correct C++ state-vector simulator supporting H, T , and CNOT, together with reproducible benchmark circuits. Validate complex amplitudes against Qiskit on small circuits.</li>
+<li><strong>GPU implementation.</strong> Implement CUDA kernels for parallel amplitude updates and measure their speedup relative to the sequential implementation on identical circuits and precision.</li>
+<li><strong>Scheduling and optimization.</strong> Explore gate/kernel fusion and parallel evaluation of independent qubit groups where the circuit permits it. Evaluate how circuit structure and target-qubit positions affect performance.</li>
+<li><strong>Application demonstration.</strong> If feasible, use the simulator for a small Shor factoring demonstration, targeting a number such as 119. This requires a suitable arithmetic circuit and decomposition of its gates; intermediate measurement and reset may be needed depending on the construction.</li>
+</ol>
+<p>My performance target is 100–250 over my single-threaded CPU baseline on sufficiently large workloads. While there are a large number of independent amplitude updates, I worry that memory bandwidth and launch overhead may prevent me from reaching this goal. I also hope that with this speedup I am able to simulate larger quantum circuits that were unfeasible just on the CPU.</p>
+<p>To evaluate speedup I will mainly be using the shors algorithm circuits while varying the number I want to factor. This should give me a good variety of circuits with different numbers of gates and different numbers of q-bits.</p>
+</section>
+<section class="content-section"><h2>Plan for poster session</h2>
+<p>I plan to have graphs of speedup on my poster board and people are welcome to run the code and see it very slowly factorize numbers.</p>
+</section>
+<section class="content-section"><h2>Current results</h2>
+<p>The only current results are the correctness of the sequential implementation. Currently I am able to factor 15 in around 4 minutes, but this is quite optimized.</p>
+</section>
+<section class="content-section"><h2>Current Concerns</h2>
+<p>I have no concerns right now as I think it will just be about getting the rest of the code debugged and optimized.</p>
+</section>
+<section class="content-section"><h2>Revised Schedule</h2>
+<table><thead><tr><th scope="col">Period</th><th scope="col">Planned work and checkpoint</th></tr></thead><tbody>
+<tr><td>November 9–16</td><td>Serial simulator, correctness checks, and benchmark circuits.</td></tr>
+<tr><td>November 16–23</td><td>Basic CUDA implementation written but not fully debugged.</td></tr>
+<tr><td>November 23–27</td><td>Finish the CUDA implementation and collect the first benchmark results.</td></tr>
+<tr><td>November 27–30</td><td>Independent-group evaluation.</td></tr>
+<tr><td>November 30–December 3</td><td>Gate/kernel fusion.</td></tr>
+<tr><td>December 3–7</td><td>Other optimizations, benchmark sweeps, and report preparation.</td></tr>
+<tr><td>December 7–11</td><td>Final validation, report, and poster.</td></tr>
+</tbody></table>
+</section>
+</article>
 <footer><p>Ayush Garg · Carnegie Mellon University · 15-418, Fall 2026</p></footer>
 </main>
 </body>
